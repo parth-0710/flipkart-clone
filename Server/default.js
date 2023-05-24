@@ -13,6 +13,6 @@ const DefaultData=async()=>{
         console.log("Error While inserting Default Data",error.message);
     }
 
-}
+} 
 
 export default DefaultData;

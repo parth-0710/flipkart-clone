@@ -4,7 +4,6 @@ const productSchema=new mongoose.Schema({
     id:{
         type:String,
         required:true,
-        unique:true
     },
     url:String,
     defaultUrl:String,
