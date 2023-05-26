@@ -2,13 +2,14 @@
 import { AppBar, Box, Toolbar, Typography, styled } from "@mui/material";
 import SearchBar from "./SearchBar";
 import CustomButtons from "./CustomButtons";
+import { Link } from "react-router-dom";
 
 
 const StyledHeader = styled(AppBar)`
     background-color: #2874f0;
     height: 56px;
 `
-const Component = styled(Box)`
+const Component = styled(Link)`
     margin-left: 12%;
     line-height: 0px;
 `
@@ -22,7 +23,8 @@ const Header = () => {
     return (
         <StyledHeader>
             <Toolbar style={{minHeight: 55}}>
-                <Component>
+                
+                <Component to="/" style={{textDecoration: "none", color: "inherit"}}>
                     <img src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png" alt="Flipkart" style={{width: 75}} />
                 <Box>
                     <SubHeader>
