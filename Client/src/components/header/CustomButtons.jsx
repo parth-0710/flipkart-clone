@@ -6,14 +6,22 @@ import { useState, useContext } from "react";
 import {DataContext} from "../../context/DataProvider";
 import Profile from "./Profile";
 
-const Wrapper = styled(Box)`
-    display: flex;
-    margin: 0 3% 0 auto;
-    & > button, & > p, & > div {
-        margin-right: 40px;
-        font-size: 16px;
-        align-items: center;
-`
+const Wrapper = styled(Box)(({theme})=>({
+    display:'flex',
+    margin: '0 3% 0 auto',
+    '& > *':{
+        marginRight: 40,
+        fontSize: 16,
+        alignItems: 'center'
+    },
+    [theme.breakpoints.down('md')]:{
+        display:'block'
+    }
+
+}));
+    
+   
+
 
 const StyledButton = styled(Button)`
     background-color: #fff;
@@ -30,11 +38,16 @@ const StyledButton = styled(Button)`
     }
 `
 
-const Container = styled(Box)`
-    display: flex;
-    align-items: center;
+const Container = styled(Box)(({theme})=>({
+    display: 'flex',
+    [theme.breakpoints.down('md')]:{
+        display:'block'
+    }
+
+}));
+   
   
-`
+
 const Cart = styled(Typography)`
 
     display: flex;
