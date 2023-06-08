@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import TotalView from "./TotalView";
 import EmptyCart from "./EmptyCart";
+import { payUsingPaytm } from "../../service/api";
+import { post } from "../../utils/paytm";
+// import Place from "./Place";
 
 
 const Container = styled(Grid)(({theme})=>({
@@ -33,7 +36,6 @@ const StyledButton = styled(Button)`
     border-radius: 2px;
     font-size: 16px;
     font-weight: 500;
-
 `
 
 const Header = styled(Box)`
@@ -46,8 +48,16 @@ const LeftComponent = styled(Grid)(({theme})=>({
     [theme.breakpoints.down('md')]:{
         marginBottom: 20
     }
-
 }))
+
+const buyNow = async() => {
+       let response = await payUsingPaytm({ amount: 500, email: 'printhelloworld39@gmail.com' });
+       let information = {
+        action: "https://securegw-stage.paytm.in/order/process",
+        params: response
+    }
+    post(information);
+}
 
 const Cart = () => {
 
@@ -73,7 +83,7 @@ const Cart = () => {
                             ))
                         }
                         <ButtonWrapper>
-                        <StyledButton>
+                        <StyledButton onClick={()=>buyNow()}>
                             Place Order
                         </StyledButton>
                         </ButtonWrapper>
@@ -82,7 +92,7 @@ const Cart = () => {
                         <TotalView CartItems={CartItems}/>
                     </Grid>
                 </Container>
-            : <EmptyCart/>
+            : <EmptyCart/>  
         }
         </>
     )

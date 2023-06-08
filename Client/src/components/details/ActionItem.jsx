@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
 import { useState } from "react";
+import { payUsingPaytm } from "../../service/api";
+import { post } from "../../utils/paytm";
+
 
 const LeftContainer = styled(Box)(({theme})=>({
     marginRight: '10px',
@@ -55,6 +58,15 @@ const ActionItem = ({ product }) => {
         navigate('/cart');
     }
 
+    const buyNow = async() => {
+       let response = await payUsingPaytm({ amount: 500, email: 'printhelloworld39@gmail.com' });
+       let information = {
+        action: "https://securegw-stage.paytm.in/order/process",
+        params: response
+    }
+    post(information);
+}
+
     // console.log("product", { product });
     return (
         <LeftContainer>
@@ -63,7 +75,7 @@ const ActionItem = ({ product }) => {
             <Image src={product.url} alt={product.title} />
             </Box>
             <StyledButton variant="contained" onClick={() => addItemToCart()} style={{marginRight : 10, backgroundColor : '#ff9f00',}}><ShoppingCartIcon/>Add to Cart</StyledButton>
-            <StyledButton variant="contained" style={{backgroundColor : '#fb641b',}}><FlashOnIcon/>Buy Now</StyledButton>
+            <StyledButton variant="contained" onClick={() => buyNow()} style={{backgroundColor : '#fb641b',}}><FlashOnIcon/>Buy Now</StyledButton>
         </LeftContainer>
     )
 }
